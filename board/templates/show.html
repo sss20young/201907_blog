@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for board in boards.all %}
+    <div class="container">
+        <a href="{% url 'detail' board.id %}">
+            <h5>제목 : {{board.title}}</h5>
+        </a>
+        <p>내용 : {{board.body}}</p>
+        <p>등록일 : {{board.update_date}}</p>
+    </div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <a href="{% url 'edit' pk=board.pk %}">글 수정하기</a> <!--글 수정-->
+    <h1>제목 : {{ board.title }}</h1>
+    <p>내용 : {{ board.body }}</p>
+    <p>등록일: {{ board.update_date }}</p>
+
+    <form action="{% url 'commentcreate' board.id %}" method='POST'>
+        {% csrf_token %}
+        {{form}}
+        <button type='submit'>댓글 등록</button>
+    </form>
+    <br>
+    
+    <div class="">
+    <h4>댓글</h4>
+    {% for comment in board.comment_set.all %}
+        {{ comment.content }}
+        <br>
+    {% endfor %}
+    <br>
+    </div>
+    <a href="{% url 'show' %}">목록</a>
+        
+
+    <a href="{% url 'delete' pk=board.pk %}">삭제</a>
+</div>
+{% endblock %}

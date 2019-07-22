@@ -1,0 +1,49 @@
+
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- 부가적인 테마 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{% url 'home' %}"> 김서영의 블로그 </a>
+      </div>
+  
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          {% if user.is_authenticated %}
+          <li><a href="{% url 'post' %}"> 글쓰기 </a></li>
+          <li><a href="{% url 'show' %}"> 글목록 </a></li>
+          <li><a href="javascript:{document.getElementById('logout').submit()}"> 로그아웃 </a>
+          <form id="logout" method="POST" action="{% url 'logout' %}">
+          {% csrf_token %} <input type="hidden" />
+          </form></li>
+          {% else %}
+          <li><a href="{% url 'signup' %}"> 회원가입 </a></li>
+          <li><a href="{% url 'login' %}"> 로그인 </a></li>
+          {% endif %}
+        </ul>
+        <form class="navbar-form navbar-left" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+          </div>
+          <button type="submit" class="btn btn-default"> 검색 </button>
+        </form>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+  {% block content %}
+  {% endblock %}
